@@ -107,7 +107,8 @@
     },
     "submit_button": {
       "widget": "button",
-      "text": "Submit"
+      "text": "Submit",
+      "callback": "on_submit"
     }
   }
 }

@@ -1,6 +1,6 @@
 import sys
 import json
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QMessageBox, QGridLayout, QFormLayout
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QMessageBox, QGridLayout, QFormLayout, QScrollArea
 from .form import JsonForm
 
 
@@ -20,6 +20,10 @@ class DemoWindow(QWidget):
         # Pass the layout_type to JsonForm
         self.form = JsonForm(schema, layout_type=layout_type)
 
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setWidget(self.form)
+
         # Bind callbacks defined in the schema to local methods
         self.form.bind_callbacks({
             "on_submit": self.on_submit,
@@ -27,12 +31,14 @@ class DemoWindow(QWidget):
         })
 
         main_layout = QVBoxLayout()
-        main_layout.addWidget(self.form)
+        main_layout.addWidget(scroll)
         self.setLayout(main_layout)
+
 
     def on_submit(self):
         data = self.form.get_data()
         QMessageBox.information(self, "Form Submitted", json.dumps(data, indent=2))
+        print(json.dumps(data, indent=2))
 
     def on_cancel(self):
         QMessageBox.warning(self, "Cancelled", "The form has been cancelled.")
@@ -41,8 +47,7 @@ class DemoWindow(QWidget):
 
 def main():
     app = QApplication(sys.argv)
-    # Example: use QGridLayout for the form, or change to QFormLayout/QVBoxLayout
-    window = DemoWindow(layout_type=QGridLayout)
+    window = DemoWindow(layout_type=QFormLayout)
     window.show()
     sys.exit(app.exec())
 

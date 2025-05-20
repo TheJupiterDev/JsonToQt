@@ -11,7 +11,7 @@ class DemoWindow(QWidget):
 
         # Load schema from example.json in the project root
         try:
-            with open("example.json", "r") as f:
+            with open("data/example.json", "r") as f:
                 schema = json.load(f)
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to load schema:\n{e}")

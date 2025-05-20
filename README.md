@@ -6,7 +6,7 @@
 
 ## Overview
 
-JsonToQt lets you define Qt-based forms declaratively in JSON. It parses the schema and genreates forms with:
+JsonToQt lets you define Qt-based forms declaratively in JSON. It parses the schema and generates forms with:
 
 - Buttons, radio buttons, checkboxes  
 - Combo boxes, line edits, text edits  
@@ -28,11 +28,7 @@ Use JsonToQt to speed up GUI prototyping, build dynamic config panels, or integr
 
 ## Installation
 
-```bash
-pip install PySide6
-```
-
-Clone this repo or download source to get started.
+pip install jsontoqt
 
 ---
 
@@ -58,49 +54,68 @@ Clone this repo or download source to get started.
 }
 ```
 
-### Run the demo app
+### Import JsonToQt and create a form
 
-From the project root:
-```bash
-python -m jsontoqt
-```
+## Usage
 
-This will launch a window showing the form defined in `example.json`.
+### Define your form schema (`example.json`):
 
----
+{
+  "title": "User Registration",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string",
+      "title": "Username"
+    },
+    "submit": {
+      "widget": "button",
+      "text": "Submit",
+      "callback": "on_submit"
+    }
+  }
+}
 
-## How to Bind Callbacks
-
-In your python code, bind functions to button callbacks declared in the JSON:
+### Load the schema, create the form, bind callbacks, and run the app:
 
 ```python
+import json
+from pathlib import Path
+from PySide6.QtWidgets import QApplication
+from jsontoqt import JsonForm
+
+# Load the JSON schema from file
+schema_path = Path("example.json")
+with schema_path.open("r", encoding="utf-8") as f:
+    schema = json.load(f)
+
+def on_submit():
+    print("Submit button clicked!")
+
+def on_cancel():
+    print("Cancel button clicked!")
+
+app = QApplication([])
+
+# Create the form
+form = JsonForm(schema)
+
+# Bind callbacks from JSON to Python functions
 form.bind_callbacks({
-    "on_submit": your_submit_function,
-    "on_cancel": your_cancel_function,
+    "on_submit": on_submit,
+    "on_cancel": on_cancel,
 })
+
+form.show()
+
+app.exec()
 ```
-
----
-
-## Project Structure
-
-```
-jsontoqt/          # Package source code
-  ├── __init__.py
-  ├── form.py       # Core JsonForm class
-  └── __main__.py   # Demo launcher
-
-example.json        # Sample schema file
-README.md           # This file
-pyproject.toml      # Packaging config
-```
-
 ---
 
 ## Requirements
 
-- Python 3.8+
-- PySide6
+- Python 3.8+  
+- jsontoqt
 
 ---
 

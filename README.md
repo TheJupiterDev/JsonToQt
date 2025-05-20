@@ -38,43 +38,28 @@ pip install jsontoqt
 
 ```json
 {
-  "title": "User Registration",
   "type": "object",
   "properties": {
-    "username": {
+    "name": {
       "type": "string",
-      "title": "Username"
+      "title": "Your Name"
     },
-    "submit": {
-      "widget": "button",
-      "text": "Submit",
-      "callback": "on_submit"
-    }
+    "age": {
+      "type": "integer",
+      "title": "Age",
+      "minimum": 0,
+      "maximum": 120
+    },
+    "bio": {
+      "type": "string",
+      "title": "Short Bio",
+      "widget": "textarea"
+    },
   }
 }
 ```
 
-### Import JsonToQt and create a form
-
-## Usage
-
-### Define your form schema (`example.json`):
-
-{
-  "title": "User Registration",
-  "type": "object",
-  "properties": {
-    "username": {
-      "type": "string",
-      "title": "Username"
-    },
-    "submit": {
-      "widget": "button",
-      "text": "Submit",
-      "callback": "on_submit"
-    }
-  }
-}
+Note that it must be a valid schema!
 
 ### Load the schema, create the form, bind callbacks, and run the app:
 
@@ -83,11 +68,6 @@ import json
 from pathlib import Path
 from PySide6.QtWidgets import QApplication
 from jsontoqt import JsonForm
-
-# Load the JSON schema from file
-schema_path = Path("example.json")
-with schema_path.open("r", encoding="utf-8") as f:
-    schema = json.load(f)
 
 def on_submit():
     print("Submit button clicked!")
@@ -99,12 +79,6 @@ app = QApplication([])
 
 # Create the form
 form = JsonForm(schema)
-
-# Bind callbacks from JSON to Python functions
-form.bind_callbacks({
-    "on_submit": on_submit,
-    "on_cancel": on_cancel,
-})
 
 form.show()
 

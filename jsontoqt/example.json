@@ -1,114 +1,99 @@
 {
-  "title": "Complex Form Example",
+  "type": "object",
   "properties": {
-    "intro_label": {
-      "widget": "label",
-      "text": "Welcome to the complex form!"
+    "name": {
+      "type": "string",
+      "title": "Your Name"
     },
-    "user_info": {
-      "widget": "group",
-      "title": "User Information",
-      "properties": {
-        "name": {
-          "widget": "lineedit",
-          "title": "Full Name"
-        },
-        "age": {
-          "widget": "spinbox",
-          "title": "Age",
-          "minimum": 0,
-          "maximum": 120
-        },
-        "gender": {
-          "widget": "radio",
-          "title": "Gender",
-          "enum": ["Male", "Female", "Other"]
-        }
-      }
+    "age": {
+      "type": "integer",
+      "title": "Age",
+      "minimum": 0,
+      "maximum": 120
     },
-    "preferences": {
-      "widget": "group",
-      "title": "Preferences",
-      "properties": {
-        "subscribe": {
-          "widget": "checkbox",
-          "title": "Subscribe to newsletter"
-        },
-        "favorite_color": {
-          "widget": "combobox",
-          "title": "Favorite Color",
-          "enum": ["Red", "Green", "Blue", "Yellow"]
-        },
-        "bio": {
-          "widget": "textarea",
-          "title": "Short Bio"
-        }
-      }
+    "bio": {
+      "type": "string",
+      "title": "Short Bio",
+      "widget": "textarea"
     },
-    "settings": {
-      "widget": "group",
-      "title": "Settings",
-      "properties": {
-        "volume": {
-          "widget": "doublespinbox",
-          "title": "Volume",
+    "favoriteColor": {
+      "type": "string",
+      "title": "Favorite Color",
+      "enum": ["Red", "Green", "Blue"]
+    },
+    "subscribe": {
+      "type": "boolean",
+      "title": "Subscribe to newsletter",
+      "widget": "checkbox"
+    },
+    "gender": {
+      "type": "string",
+      "title": "Gender",
+      "enum": ["Male", "Female", "Other"],
+      "widget": "radio"
+    },
+    "skills": {
+      "type": "array",
+      "title": "Skills",
+      "widget": "multiselect",
+      "options": ["Python", "C++", "JavaScript", "Design"],
+      "default": ["Python", "Design"]
+    },
+    "additionalInfo": {
+      "title": "Additional Info",
+      "widget": "toggle",
+      "children": {
+        "notes": {
+          "type": "string",
+          "title": "Notes",
+          "widget": "textarea"
+        },
+        "rating": {
+          "type": "number",
+          "title": "Rating",
           "minimum": 0.0,
-          "maximum": 1.0,
-          "step": 0.01
-        },
-        "notifications": {
-          "widget": "toggle",
-          "title": "Enable Notifications",
-          "children": {
-            "email_alert": {
-              "widget": "checkbox",
-              "title": "Email Alerts"
-            },
-            "sms_alert": {
-              "widget": "checkbox",
-              "title": "SMS Alerts"
-            }
-          }
+          "maximum": 5.0,
+          "step": 0.1
         }
       }
     },
-    "dynamic_sections": {
+    "favoriteBooks": {
+      "title": "Favorite Books",
+      "type": "array",
       "widget": "multi_toggle",
-      "title": "Add Dynamic Sections",
-      "enum": ["Section A", "Section B"],
+      "enum": ["Fiction", "Non-Fiction"],
       "children_map": {
-        "Section A": {
+        "Fiction": {
+          "type": "object",
           "properties": {
-            "field1": {
-              "widget": "lineedit",
-              "title": "Field 1"
+            "title": {
+              "type": "string",
+              "title": "Book Title"
             },
-            "field2": {
-              "widget": "checkbox",
-              "title": "Field 2"
+            "author": {
+              "type": "string",
+              "title": "Author"
             }
           }
         },
-        "Section B": {
+        "Non-Fiction": {
+          "type": "object",
           "properties": {
-            "field3": {
-              "widget": "spinbox",
-              "title": "Field 3",
-              "minimum": 10,
-              "maximum": 50
+            "title": {
+              "type": "string",
+              "title": "Book Title"
             },
-            "field4": {
-              "widget": "textarea",
-              "title": "Field 4"
+            "author": {
+              "type": "string",
+              "title": "Author"
+            },
+            "topic": {
+              "type": "string",
+              "title": "Topic"
             }
           }
         }
       }
-    },
-    "submit_button": {
-      "widget": "button",
-      "text": "Submit",
-      "callback": "on_submit"
     }
   }
 }

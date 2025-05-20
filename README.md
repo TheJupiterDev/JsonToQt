@@ -2,6 +2,8 @@
 
 **Convert JSON schemas into dynamic PySide6 GUI forms - no manual UI coding needed!**
 
+> ⚠️ This documentation is possibly outdated or false! New documentation coming soon™️
+
 ---
 
 ## Overview

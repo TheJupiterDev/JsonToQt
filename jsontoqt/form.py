@@ -1,9 +1,7 @@
-import sys
-import json
 from PySide6.QtWidgets import (
-    QApplication, QWidget, QLabel, QLineEdit, QTextEdit, QCheckBox,
+    QWidget, QLabel, QLineEdit, QTextEdit, QCheckBox,
     QRadioButton, QComboBox, QPushButton, QSpinBox, QDoubleSpinBox,
-    QVBoxLayout, QHBoxLayout, QGroupBox, QFormLayout, QMessageBox
+    QVBoxLayout, QGroupBox, QFormLayout
 )
 
 
@@ -146,44 +144,3 @@ class JsonForm(QWidget):
                         data[key] = btn.text()
                         break
         return data
-
-
-class TestFormWindow(QWidget):
-    """
-    Testing container for rendering a JsonForm.
-    Connects buttons to local callback methods via schema bindings.
-    """
-    def __init__(self, schema_path):
-        super().__init__()
-        self.setWindowTitle("Test Form Window")
-        self.resize(600, 500)
-
-        with open(schema_path, "r") as f:
-            schema = json.load(f)
-
-        self.form = JsonForm(schema)
-        self.form.bind_callbacks({
-            "on_submit": self.on_submit,
-            "on_cancel": self.on_cancel
-        })
-
-        layout = QVBoxLayout()
-        layout.addWidget(self.form)
-        self.setLayout(layout)
-
-    def on_submit(self):
-        """Handles submission from the form."""
-        data = self.form.get_data()
-        QMessageBox.information(self, "Form Submitted", json.dumps(data, indent=2))
-
-    def on_cancel(self):
-        """Handles cancellation logic."""
-        QMessageBox.warning(self, "Cancelled", "The form has been cancelled.")
-        self.close()
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = TestFormWindow("example.json")
-    window.show()
-    sys.exit(app.exec())

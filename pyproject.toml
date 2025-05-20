@@ -1,0 +1,12 @@
+[project]
+name = "jsontoqt"
+version = "0.1.0"
+description = "Convert JSON schema into PySide6 GUI forms"
+authors = [
+  { name="Jupiter Dev", email="thatgeometrydude@gmail.com" }
+]
+dependencies = ["PySide6"]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

@@ -1,0 +1,51 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Virtual environment folders
+venv/
+env/
+ENV/
+.venv/
+
+# IDE/editor folders and files
+.vscode/
+
+# Python test cache
+.pytest_cache/
+.tox/
+
+# Coverage reports
+.coverage
+htmlcov/
+.coverage.*
+
+# MacOS files
+.DS_Store
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Qt Designer backup files
+*.py~ 
+*.ui~
+
+# Others
+*.bak
+*.swp

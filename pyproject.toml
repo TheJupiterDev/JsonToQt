@@ -1,12 +1,24 @@
 [project]
 name = "jsontoqt"
-version = "0.1.0"
-description = "Convert JSON schema into PySide6 GUI forms"
+version = "0.1.1"
+description = "Convert JSON schemas into dynamic PySide6 GUI forms with no manual UI coding needed."
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.8"
 authors = [
-  { name="Jupiter Dev", email="thatgeometrydude@gmail.com" }
+    {name = "JupiterDev", email = "thatgeometrydude@gmail.com"}
 ]
-dependencies = ["PySide6"]
+license = {text = "MIT"}
+keywords = ["PySide6", "Qt", "JSON", "GUI", "forms"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[project.urls]
+Homepage = "https://github.com/thejupiterdev/jsontoqt"
+Repository = "https://github.com/thejupiterdev/jsontoqt"
 
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"

@@ -1,0 +1,51 @@
+{
+  "type": "object",
+  "properties": {
+    "favoriteBook": {
+      "title": "Favorite Book",
+      "description": "Choose a type of book and fill in the details",
+      "oneOf": [
+        {
+          "title": "Fiction",
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "Fiction"
+            },
+            "title": {
+              "type": "string",
+              "title": "Book Title"
+            },
+            "author": {
+              "type": "string",
+              "title": "Author"
+            }
+          },
+          "required": ["type", "title", "author"]
+        },
+        {
+          "title": "Non-Fiction",
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "Non-Fiction"
+            },
+            "title": {
+              "type": "string",
+              "title": "Book Title"
+            },
+            "author": {
+              "type": "string",
+              "title": "Author"
+            },
+            "topic": {
+              "type": "string",
+              "title": "Topic"
+            }
+          },
+          "required": ["type", "title", "author", "topic"]
+        }
+      ]
+    }
+  }
+}

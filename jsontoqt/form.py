@@ -79,14 +79,15 @@ class JsonForm(QWidget):
             group.setLayout(group_layout)
             layout.addWidget(group)
             return
-        
-        # Handle multi_toggle as combo + add/remove
-        if field.get("widget") == "multi_toggle" and "enum" in field and "children_map" in field:
+
+        # Handle oneOf-based multi-toggle
+        if field_type == "array" and "items" in field and "oneOf" in field["items"]:
             layout.addWidget(QLabel(title))
 
+            options = [item.get("title", f"Option {i}") for i, item in enumerate(field["items"]["oneOf"])]
             row = QHBoxLayout()
             combo = QComboBox()
-            combo.addItems(field["enum"])
+            combo.addItems(options)
             add_btn = QPushButton("Add")
             row.addWidget(combo)
             row.addWidget(add_btn)
@@ -95,18 +96,17 @@ class JsonForm(QWidget):
             container = QVBoxLayout()
             layout.addLayout(container)
 
-            self.fields[key] = []  # store list of (option, widget) tuples
+            self.fields[key] = []
 
             def add_child_group():
-                selected = combo.currentText()
-                if not selected:
+                idx = combo.currentIndex()
+                if idx < 0:
                     return
 
-                child_schema = field["children_map"].get(selected)
-                if not child_schema:
-                    return
+                child_schema = field["items"]["oneOf"][idx]
+                selected_title = child_schema.get("title", f"Option {idx}")
 
-                group = QGroupBox(selected)
+                group = QGroupBox(selected_title)
                 group_layout = self.layout_type()
                 remove_btn = QPushButton("Remove")
                 remove_row = QHBoxLayout()
@@ -114,11 +114,11 @@ class JsonForm(QWidget):
                 remove_row.addWidget(remove_btn)
                 group_layout.addLayout(remove_row)
 
-                self._build_schema(child_schema, group_layout, full_path + [f"{selected}_{len(self.fields[key])}"])
+                self._build_schema(child_schema, group_layout, full_path + [f"{selected_title}_{len(self.fields[key])}"])
                 group.setLayout(group_layout)
                 container.addWidget(group)
 
-                self.fields[key].append((selected, group))
+                self.fields[key].append((selected_title, group))
 
                 def remove():
                     container.removeWidget(group)
@@ -142,7 +142,7 @@ class JsonForm(QWidget):
             layout.addWidget(widget)
             return
 
-        # Handle enum (dropdown or radio)
+        # Handle enum (dropdown)
         if "enum" in field:
             widget = QComboBox()
             widget.addItems(field["enum"])
@@ -151,8 +151,11 @@ class JsonForm(QWidget):
             layout.addWidget(widget)
             return
 
-        # Primitive types
-        if field_type == "string":
+        # Format-based UI hints
+        fmt = field.get("format")
+        if field_type == "string" and fmt == "textarea":
+            widget = QTextEdit()
+        elif field_type == "string":
             widget = QLineEdit()
         elif field_type == "integer":
             widget = QSpinBox()

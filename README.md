@@ -8,20 +8,13 @@
 
 ## Overview
 
-JsonToQt lets you define Qt-based forms declaratively in JSON. It parses the schema and generates forms with:
-
-- Buttons, radio buttons, checkboxes  
-- Combo boxes, line edits, text edits  
-- Spin boxes (int & double), and labels  
-- Built-in support for wiring button callbacks by name
-
-Use JsonToQt to speed up GUI prototyping, build dynamic config panels, or integrate with low-code workflows.
+JsonToQt is broken & not currently maintained
 
 ---
 
 ## Features
 
-- Supports common PySide6 widgets from a JSON schema  
+- Supports common PySide6 widgets from a JSON schema-like syntax
 - Bind button callbacks by name to Python functions  
 - Easily extendable for more widgets or custom behaviors  
 - Simple to use with minimal dependencies (just PySide6)

@@ -1,6 +1,6 @@
 [project]
 name = "jsontoqt"
-version = "0.4.0"
+version = "0.4.1"
 description = "Convert JSON schemas into dynamic PySide6 GUI forms with no manual UI coding needed."
 readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.8"

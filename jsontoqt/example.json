@@ -1,0 +1,99 @@
+{
+  "title": "User Profile Configuration",
+  "type": "object",
+  "properties": {
+    "username": {
+      "type": "string",
+      "title": "Username",
+      "default": "guest"
+    },
+    "age": {
+      "type": "integer",
+      "title": "Age",
+      "minimum": 0,
+      "maximum": 120,
+      "default": 30
+    },
+    "newsletter": {
+      "type": "boolean",
+      "title": "Subscribe to newsletter",
+      "default": true
+    },
+    "gender": {
+      "type": "string",
+      "title": "Gender",
+      "enum": ["Male", "Female", "Other"]
+    },
+    "language": {
+      "type": "string",
+      "title": "Preferred Language",
+      "enum": ["English", "Spanish", "French", "German", "Japanese", "Mandarin"],
+      "default": "English"
+    },
+    "interests": {
+      "type": "array",
+      "title": "Interests",
+      "x-multiselect": true,
+      "enum": ["Music", "Movies", "Books", "Sports", "Travel", "Art"],
+      "default": ["Music", "Travel"]
+    },
+    "contact": {
+      "type": "object",
+      "title": "Contact Info",
+      "properties": {
+        "email": {
+          "type": "string",
+          "title": "Email Address"
+        },
+        "phone": {
+          "type": "string",
+          "title": "Phone Number"
+        }
+      }
+    },
+    "dynamic": {
+      "type": "object",
+      "title": "Dynamic Sections",
+      "x-multiple-group": {
+        "Education": {
+          "type": "object",
+          "properties": {
+            "degree": {
+              "type": "string",
+              "title": "Degree"
+            },
+            "institution": {
+              "type": "string",
+              "title": "Institution"
+            },
+            "year": {
+              "type": "integer",
+              "title": "Graduation Year",
+              "minimum": 1900,
+              "maximum": 2100
+            }
+          }
+        },
+        "Work Experience": {
+          "type": "object",
+          "properties": {
+            "position": {
+              "type": "string",
+              "title": "Job Title"
+            },
+            "company": {
+              "type": "string",
+              "title": "Company"
+            },
+            "years": {
+              "type": "number",
+              "title": "Years of Experience",
+              "minimum": 0,
+              "maximum": 50
+            }
+          }
+        }
+      }
+    }
+  }
+}

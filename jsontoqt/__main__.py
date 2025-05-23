@@ -14,7 +14,7 @@ class DemoWindow(QWidget):
             with open("example.json", "r") as f:
                 schema = json.load(f)
         except Exception as e:
-            QMessageBox.critical(self, "Error", f"Failed to load schema:\n{e}")
+            QMessageBox.critical(self, "Error", f"Failed to load schema:\n{str(e)}")
             sys.exit(1)
 
         self.form = JsonForm(schema)
@@ -33,7 +33,10 @@ class DemoWindow(QWidget):
         self.setLayout(main_layout)
     
     def submit(self):
-        print(self.form.get_form_data())
+        data = self.form.get_form_data()
+        print(data)
+        with open("form_output.json", "w") as f:
+            json.dump(data, f, indent=2)
 
 
 def main():

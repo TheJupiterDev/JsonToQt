@@ -34,7 +34,7 @@ schema = {
         "gender": {
             "type": "string",
             "title": "Gender",
-            "enum": ["Male", "Female", "Other"]
+            "enum": ["Male", "Female"]
         },
         "hobbies": {
             "type": "string",
